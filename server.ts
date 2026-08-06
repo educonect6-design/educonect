@@ -63,73 +63,10 @@ function getGenAI(): GoogleGenAI {
   return aiClient;
 }
 
-// In-memory mock database populated with engaging initial educational data
-let activitiesList: Activity[] = [
-  {
-    id: "act-1",
-    title: "Equações de Segundo Grau no Cotidiano",
-    description: "Pesquise e descreva uma situação prática onde equações de segundo grau (trajetórias de projéteis, pontes, economia, etc.) são aplicadas. Resolva também os exercícios 1 a 5 da página 42 do livro didático.",
-    subject: "Matemática",
-    createdBy: "Prof. Mailk",
-    createdAt: "2026-05-25T14:00:00Z",
-    dueDate: "2026-06-05T23:59:59Z",
-    turma: "9º Ano A - Ensino Fundamental II",
-    submissions: [
-      {
-        studentName: "Ana Souza",
-        submittedAt: "2026-05-26T18:30:00Z",
-        content: "Eu escolhi a trajetória de uma bola de futebol sendo chutada. A equação que define sua altura y em metros em função da distância x é y = -0.05x² + x. O chute alcança o ponto mais alto (vértice da parábola) na metade da distância total. Para os exercícios resolvidos: 1) x=2 ou x=3, 2) x=-5 ou x=5, 3) x=0 ou x=4, 4) x=1, 5) x=-2 ou x=-3.",
-        status: "Entregue"
-      }
-    ]
-  },
-  {
-    id: "act-2",
-    title: "Trabalho Dirigido: O Espaço Geográfico e a Globalização",
-    description: "Escreva uma reflexão sobre como os fluxos de informação, mercadorias e pessoas redefiniram o conceito de fronteiras no mundo globalizado atual. Destaque um caso prático nacional.",
-    subject: "Geografia",
-    createdBy: "Prof. Marcos",
-    createdAt: "2026-05-26T09:00:00Z",
-    dueDate: "2026-06-12T23:59:59Z",
-    turma: "9º Ano A - Ensino Fundamental II",
-    submissions: []
-  },
-  {
-    id: "act-3",
-    title: "Relatório: Ecossistema Fechado e Ciclo Biótico",
-    description: "Descreva as interações observadas entre fatores bióticos e abióticos no mini-ecossistema montado em garrafa pet. Explique o ciclo interno da água e a relevância das plantas autótrofas.",
-    subject: "Ciências",
-    createdBy: "Profª. Nébia",
-    createdAt: "2026-05-20T10:00:00Z",
-    dueDate: "2026-05-26T12:00:00Z",
-    turma: "9º Ano A - Ensino Fundamental II",
-    submissions: [
-      {
-        studentName: "Ana Souza",
-        submittedAt: "2026-05-25T11:15:00Z",
-        content: "Relatório de Ciências: O ecossistema fechado permaneceu estável. Houve condensação nas paredes (ciclo da água). As plantas sobreviveram graças à reciclagem de dióxido de carbono pelas reações metabólicas.",
-        grade: "9.8",
-        feedback: "Excelente relatório, Ana! A análise das relações ecológicas em escala micro foi o ponto forte do seu trabalho. Parabéns!",
-        status: "Corrigido"
-      }
-    ]
-  }
-];
+// Activities are created by teachers at runtime; no seed data.
+let activitiesList: Activity[] = [];
 
-let absenceJustifications: AbsenceJustification[] = [
-  {
-    id: "just-1",
-    studentName: "Ana Souza",
-    subject: "Matemática",
-    professorName: "Prof. Mailk",
-    date: "2026-05-22",
-    reason: "Atestado Médico (Consulta Dental)",
-    description: "Tive uma consulta odontológica agendada para sexta-feira de manhã para manutenção do aparelho ortodôntico e acabei perdendo as duas primeiras aulas. Segue anotação da clínica em anexo virtual.",
-    status: "Aceito",
-    feedback: "Justificativa aceita, Ana! Lembre de copiar a matéria com os colegas e fazer os exercícios recomendados.",
-    createdAt: "2026-05-22T14:30:00Z"
-  }
-];
+let absenceJustifications: AbsenceJustification[] = [];
 
 let chatMessages: ChatMessage[] = [
   {
