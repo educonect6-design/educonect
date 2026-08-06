@@ -10,9 +10,13 @@ const dbId = firebaseConfig.firestoreDatabaseId && firebaseConfig.firestoreDatab
   ? firebaseConfig.firestoreDatabaseId
   : undefined;
 
-// Initialize Firestore with auto-detect long polling for sandboxed & proxy environments
+// Initialize Firestore with auto-detect long polling for sandboxed & proxy environments.
+// ignoreUndefinedProperties drops undefined fields instead of throwing: optional fields
+// (a student has no `subject`, a submission has no `photo`) would otherwise abort the
+// whole write and leave records half-created.
 export const db = initializeFirestore(app, {
   experimentalAutoDetectLongPolling: true,
+  ignoreUndefinedProperties: true,
 }, dbId);
 
 export const auth = getAuth(app);

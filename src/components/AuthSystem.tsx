@@ -165,24 +165,36 @@ export default function AuthSystem({
 
     setLoading(true);
 
+    const newUser: UserProfile = {
+      matricula: cleanMatricula,
+      name: cleanName,
+      role: role,
+      email: `${cleanMatricula}@educonnect.edu.br`,
+      createdAt: new Date().toLocaleDateString('pt-BR')
+    };
+    // Only teachers have a subject. Firestore rejects `undefined` values outright,
+    // so the key must be omitted entirely rather than set to undefined.
+    if (role === 'professor') {
+      newUser.subject = subject;
+    }
+
+    // Writes the profile keyed by the Firebase Auth uid. The password is never stored
+    // here — Firebase Authentication keeps it hashed internally.
+    const saveProfile = (uid: string) =>
+      setDoc(doc(db, 'users', uid), { ...newUser, createdAtTimestamp: serverTimestamp() });
+
     try {
       const credential = await createUserWithEmailAndPassword(auth, toAuthEmail(cleanMatricula), password);
 
-      const newUser: UserProfile = {
-        matricula: cleanMatricula,
-        name: cleanName,
-        role: role,
-        subject: role === 'professor' ? subject : undefined,
-        email: `${cleanMatricula}@educonnect.edu.br`,
-        createdAt: new Date().toLocaleDateString('pt-BR')
-      };
-
-      // Save the profile in Firestore, keyed by the Firebase Auth uid. The password itself
-      // is never stored here — Firebase Authentication keeps it hashed internally.
-      await setDoc(doc(db, 'users', credential.user.uid), {
-        ...newUser,
-        createdAtTimestamp: serverTimestamp()
-      });
+      try {
+        await saveProfile(credential.user.uid);
+      } catch (profileErr) {
+        // The auth account exists but its profile doesn't. Roll it back, otherwise the
+        // matrícula becomes unusable: it can't log in (no profile) and can't register
+        // again (e-mail already taken).
+        await credential.user.delete().catch(() => {});
+        throw profileErr;
+      }
 
       setSuccessMsg('Conta cadastrada com sucesso!');
       setTimeout(() => {
@@ -190,6 +202,27 @@ export default function AuthSystem({
       }, 700);
 
     } catch (err: any) {
+      // Recovery for accounts orphaned before the rollback above existed: the login
+      // credentials are valid but no profile was ever written, so finish the job.
+      if (err?.code === 'auth/email-already-in-use') {
+        try {
+          const credential = await signInWithEmailAndPassword(auth, toAuthEmail(cleanMatricula), password);
+          const existing = await getDoc(doc(db, 'users', credential.user.uid));
+
+          if (!existing.exists()) {
+            await saveProfile(credential.user.uid);
+            setSuccessMsg('Conta cadastrada com sucesso!');
+            setTimeout(() => {
+              onLoginSuccess(newUser);
+            }, 700);
+            return;
+          }
+        } catch (recoveryErr) {
+          // Wrong password, or the profile write failed again — fall through to the
+          // normal "matrícula already registered" message below.
+        }
+      }
+
       console.error('Erro no registro:', err);
       setErrorMsg(getAuthErrorMessage(err, 'Erro ao criar sua conta. Tente novamente.'));
     } finally {
