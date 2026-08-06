@@ -1,4 +1,6 @@
-const CACHE_VERSION = 'v2';
+// Bump this whenever cached assets change (e.g. new app icons), otherwise returning
+// users keep being served the previous versions from the old cache.
+const CACHE_VERSION = 'v3';
 const CACHE_NAME = `educonnect-${CACHE_VERSION}`;
 
 const APP_SHELL = [
