@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: educonect
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /api/activities
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Required for the EduMind AI tutor and flashcard generation.
+      # Set the value in the Render dashboard (Environment tab) — never commit it.
+      - key: GEMINI_API_KEY
+        sync: false
+      # Optional: full service account JSON, as a single-line string. Enables the
+      # aluno/professor role checks on the API write routes. Without it the server
+      # still runs, just without that extra server-side check.
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        sync: false

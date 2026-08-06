@@ -1,25 +1,44 @@
-import { initializeApp, App } from 'firebase-admin/app';
+import { initializeApp, cert, App } from 'firebase-admin/app';
 import { getAuth, Auth } from 'firebase-admin/auth';
 import { getFirestore, Firestore } from 'firebase-admin/firestore';
 
-let isAdminReady = false;
-let adminAuth: Auth | null = null;
-let adminDb: Firestore | null = null;
-
-// Uses Application Default Credentials (works out of the box on Cloud Run and most
-// Google-hosted environments). Locally, set GOOGLE_APPLICATION_CREDENTIALS to a service
-// account JSON file to enable it — see .env.example. Without credentials, the API keeps
-// working exactly like before (open, unauthenticated), just without the extra role check.
-try {
-  const app: App = initializeApp();
-  adminAuth = getAuth(app);
-  adminDb = getFirestore(app);
-  isAdminReady = true;
-} catch (e: any) {
-  console.warn(
-    '[firebaseAdmin] Firebase Admin não configurado — rotas da API continuam sem checagem de papel. ' +
-    'Configure GOOGLE_APPLICATION_CREDENTIALS para ativar a verificação em produção.'
-  );
+export interface AdminHandles {
+  auth: Auth;
+  db: Firestore;
 }
 
-export { adminAuth, adminDb, isAdminReady };
+/**
+ * Resolves to the Admin SDK handles when real credentials are available, or to
+ * `null` when they aren't (so the role middleware can degrade to a no-op instead
+ * of rejecting every request).
+ *
+ * Credentials are read from, in order:
+ *   1. FIREBASE_SERVICE_ACCOUNT_JSON — the full service account JSON as a string
+ *      (use this on hosts without Google metadata, e.g. Render).
+ *   2. Application Default Credentials — GOOGLE_APPLICATION_CREDENTIALS locally,
+ *      or the metadata server on Cloud Run / GCP.
+ *
+ * Note: `initializeApp()` succeeds even with no credentials present, so we must
+ * actively fetch an access token to know whether they really work.
+ */
+export const adminReady: Promise<AdminHandles | null> = (async () => {
+  try {
+    const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
+
+    const app: App = serviceAccountJson
+      ? initializeApp({ credential: cert(JSON.parse(serviceAccountJson)) })
+      : initializeApp();
+
+    // Probe for a real token — this is what distinguishes "configured" from "not configured".
+    await app.options.credential!.getAccessToken();
+
+    return { auth: getAuth(app), db: getFirestore(app) };
+  } catch (e: any) {
+    console.warn(
+      '[firebaseAdmin] Firebase Admin não configurado — as rotas da API continuam abertas, sem checagem de papel. ' +
+      'Para ativar, defina FIREBASE_SERVICE_ACCOUNT_JSON (ou GOOGLE_APPLICATION_CREDENTIALS). Detalhe: ' +
+      String(e?.message).slice(0, 120)
+    );
+    return null;
+  }
+})();

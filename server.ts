@@ -336,7 +336,8 @@ let chatMessages: ChatMessage[] = [
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  // Hosting platforms (Render, Cloud Run, …) assign the port via env; 3000 is the local default.
+  const PORT = Number(process.env.PORT) || 3000;
 
   app.use(express.json());
 

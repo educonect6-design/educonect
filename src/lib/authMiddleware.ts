@@ -1,15 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import { adminAuth, adminDb, isAdminReady } from './firebaseAdmin';
+import { adminReady } from './firebaseAdmin';
 
 /**
  * Minimal role gate for the write endpoints that matter (creating activities, grading,
  * responding to justifications, posting announcements/report cards). When the Admin SDK
  * has no credentials configured (see firebaseAdmin.ts), this becomes a no-op so local
- * dev keeps working without extra setup — the check only activates where it's configured.
+ * dev and unconfigured hosts keep working — the check only activates where it's set up.
  */
 export function requireRole(role: 'aluno' | 'professor') {
   return async (req: Request, res: Response, next: NextFunction) => {
-    if (!isAdminReady) {
+    const admin = await adminReady;
+    if (!admin) {
       next();
       return;
     }
@@ -22,8 +23,8 @@ export function requireRole(role: 'aluno' | 'professor') {
     }
 
     try {
-      const decoded = await adminAuth!.verifyIdToken(idToken);
-      const profileSnap = await adminDb!.collection('users').doc(decoded.uid).get();
+      const decoded = await admin.auth.verifyIdToken(idToken);
+      const profileSnap = await admin.db.collection('users').doc(decoded.uid).get();
       const profileRole = profileSnap.exists ? profileSnap.data()?.role : null;
 
       if (profileRole !== role) {
