@@ -1,0 +1,663 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+#edu-app-root {
+  font-family: var(--font-sans);
+}
+
+/* Anti-aliasing de Alta Definição para Fontes Crisp, Nítidas e de Fácil Leitura */
+#edu-app-root,
+#edu-app-root * {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Proteção global de legibilidade otimizada para todas as telas */
+
+
+/* ----------------------------------------------------
+   ACADEMIC BLUE NIGHT - Tema Escuro de Alta Fidelidade
+   ---------------------------------------------------- */
+
+/* Configuração do contêiner do aplicativo e subcomponentes com transições de tema otimizadas e leves */
+#edu-app-root, 
+#edu-app-root aside, 
+#edu-app-root header, 
+.theme-transition,
+#edu-app-root input,
+#edu-app-root textarea,
+#edu-app-root select,
+#edu-app-root button,
+#edu-app-root h1,
+#edu-app-root h2,
+#edu-app-root h3,
+#edu-app-root h4 {
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ----------------------------------------------------
+   ACADEMIC LIGHT MODE - Tema Claro Regulado e Refinado
+   ---------------------------------------------------- */
+#edu-app-root:not(.dark) {
+  background-color: #f8fafc !important; /* Slate 50 de alta fidelidade */
+  color: #1e293b !important; /* Slate 800 de alto contraste */
+}
+
+/* Garante fundos brancos puros e bordas nítidas para painéis e cards no tema claro */
+#edu-app-root:not(.dark) .bg-white,
+#edu-app-root:not(.dark) aside,
+#edu-app-root:not(.dark) header {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+}
+
+#edu-app-root:not(.dark) input,
+#edu-app-root:not(.dark) textarea,
+#edu-app-root:not(.dark) select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+#edu-app-root:not(.dark) input::placeholder,
+#edu-app-root:not(.dark) textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* Regula contrastes de texto secundário e descrições no modo claro para atender padrões de acessibilidade (WCAG AA/AAA) */
+#edu-app-root:not(.dark) .text-slate-400:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-gray-400:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-zinc-400:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]) {
+  color: #475569 !important; /* Slate-600 (contraste excelente e muito nítido) */
+}
+
+#edu-app-root:not(.dark) .text-slate-500:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-gray-500:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-zinc-500:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]) {
+  color: #334155 !important; /* Slate-700 para leitura extremamente nítida e confortável */
+}
+
+#edu-app-root:not(.dark) .text-slate-600:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-gray-600:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-slate-700:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-gray-700:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-slate-900:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-slate-950:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-gray-900:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]),
+#edu-app-root:not(.dark) .text-gray-950:not(.text-white):not([class*="text-indigo-"]):not([class*="text-emerald-"]) {
+  color: #1e293b !important; /* Mapeia para Slate-800 - Suave, elegante e com contraste perfeito (previne cansaço visual e halos borrados) */
+}
+
+/* Títulos sem classe específica de texto recebem Slate-800 para legibilidade perfeita, mas sem forçar fontes com classe personalizada */
+#edu-app-root:not(.dark) :is(h1, h2, h3, h4, h5, h6):not([class*="text-"]) {
+  color: #1e293b !important;
+}
+
+#edu-app-root:not(.dark) .text-indigo-650 {
+  color: #4f46e5 !important;
+}
+
+#edu-app-root:not(.dark) .text-indigo-600 {
+  color: #4f46e5 !important;
+}
+
+#edu-app-root:not(.dark) .text-indigo-700,
+#edu-app-root:not(.dark) .text-indigo-900 {
+  color: #3730a3 !important;
+}
+
+#edu-app-root:not(.dark) .bg-slate-50,
+#edu-app-root:not(.dark) .bg-slate-50\/30 {
+  background-color: #f8fafc !important;
+}
+
+#edu-app-root:not(.dark) .bg-slate-100 {
+  background-color: #f1f5f9 !important;
+}
+
+#edu-app-root:not(.dark) .border-slate-100,
+#edu-app-root:not(.dark) .border-slate-150,
+#edu-app-root:not(.dark) .border-slate-200 {
+  border-color: #e2e8f0 !important;
+}
+
+/* ----------------------------------------------------
+   PROTEÇÃO DE CONTRASTE EM CONTÊINERES COLORIDOS/ESCUROS (MODO CLARO)
+   ---------------------------------------------------- */
+
+/* Mantém textos claros perfeitos apenas dentro de elementos ou gradientes que são REALMENTE escuros */
+#edu-app-root:not(.dark) :is(
+  .text-white, 
+  [class*="text-white"],
+  .bg-slate-900, .bg-slate-950, .bg-slate-800,
+  .bg-indigo-950, .bg-indigo-900, .bg-indigo-800, .bg-indigo-700, .bg-indigo-600,
+  .bg-purple-950, .bg-purple-900, .bg-purple-800, .bg-purple-700, .bg-purple-600,
+  .bg-emerald-950, .bg-emerald-900, .bg-emerald-800, .bg-emerald-700, .bg-emerald-600,
+  .bg-rose-950, .bg-rose-900, .bg-rose-800, .bg-rose-700, .bg-rose-600,
+  .bg-blue-900, .bg-blue-800, .bg-blue-700, .bg-blue-600,
+  [class*="from-slate-9"], [class*="from-slate-8"],
+  [class*="from-indigo-9"], [class*="from-indigo-8"], [class*="from-indigo-7"],
+  [class*="from-purple-9"], [class*="from-purple-8"], [class*="from-purple-7"],
+  [class*="from-emerald-9"], [class*="from-emerald-8"], [class*="from-emerald-7"],
+  [class*="from-rose-9"], [class*="from-rose-8"], [class*="from-rose-7"],
+  [class*="from-blue-9"], [class*="from-blue-8"], [class*="from-blue-7"]
+) :is(h1, h2, h3, h4, h5, h6, p, span, div, strong, b, small, li, button, a) {
+  color: #ffffff !important;
+}
+
+/* Protege cores secundárias leves específicas (como indigo-200) para contraste correto dentro de elementos de fundo escuro */
+#edu-app-root:not(.dark) :is(
+  .text-white, 
+  [class*="text-white"],
+  .bg-slate-900, .bg-slate-950, .bg-slate-800,
+  .bg-indigo-950, .bg-indigo-900, .bg-indigo-800, .bg-indigo-700, .bg-indigo-600,
+  .bg-purple-950, .bg-purple-900, .bg-purple-800, .bg-purple-700, .bg-purple-600,
+  .bg-emerald-950, .bg-emerald-900, .bg-emerald-800, .bg-emerald-700, .bg-emerald-600,
+  .bg-rose-950, .bg-rose-900, .bg-rose-800, .bg-rose-700, .bg-rose-600,
+  .bg-blue-900, .bg-blue-800, .bg-blue-700, .bg-blue-600,
+  [class*="from-slate-9"], [class*="from-slate-8"],
+  [class*="from-indigo-9"], [class*="from-indigo-8"], [class*="from-indigo-7"],
+  [class*="from-purple-9"], [class*="from-purple-8"], [class*="from-purple-7"],
+  [class*="from-emerald-9"], [class*="from-emerald-8"], [class*="from-emerald-7"],
+  [class*="from-rose-9"], [class*="from-rose-8"], [class*="from-rose-7"],
+  [class*="from-blue-9"], [class*="from-blue-8"], [class*="from-blue-7"]
+) :is(.text-indigo-200, .text-indigo-100, .text-slate-300, .text-slate-200, .text-gray-300, .text-gray-200, .text-emerald-100, .text-teal-100) {
+  color: #c7d2fe !important;
+}
+
+/* Protege botões preenchidos com cores escuras ou primárias no modo claro */
+#edu-app-root:not(.dark) :is(.bg-indigo-600, .bg-emerald-600, .bg-purple-600, .bg-rose-600, .bg-slate-900, .bg-indigo-950, .bg-slate-950) {
+  color: #ffffff !important;
+}
+
+#edu-app-root:not(.dark) :is(.bg-indigo-600, .bg-emerald-600, .bg-purple-600, .bg-rose-600, .bg-slate-900, .bg-indigo-950, .bg-slate-950) :is(span, p, div, svg) {
+  color: #ffffff !important;
+}
+
+/* Base quando .dark está ativa */
+#edu-app-root.dark {
+  background-color: #0b0f19 !important; /* Azul Slate profundo */
+  color: #e2e8f0 !important;
+}
+
+/* Fundo da Barra Lateral (aside) e cabeçalhos */
+#edu-app-root.dark aside,
+#edu-app-root.dark header {
+  background-color: #111827 !important;
+  border-color: #1f2937 !important;
+}
+
+/* Cartões (Cards), Modais e caixas brancas */
+#edu-app-root.dark .bg-white,
+#edu-app-root.dark [class*="bg-white"] {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+#edu-app-root.dark .border-slate-200,
+#edu-app-root.dark .border-slate-150,
+#edu-app-root.dark .border-slate-100,
+#edu-app-root.dark .border-gray-150,
+#edu-app-root.dark .border-gray-200,
+#edu-app-root.dark .border-gray-100,
+#edu-app-root.dark .border-gray-250,
+#edu-app-root.dark .border-slate-200\/50,
+#edu-app-root.dark .border-slate-200\/60 {
+  border-color: #374151 !important;
+}
+
+/* Mensagens de Chat recebidas ou quadros cinza leves */
+#edu-app-root.dark .bg-slate-50,
+#edu-app-root.dark .bg-slate-50\/50,
+#edu-app-root.dark .bg-slate-100,
+#edu-app-root.dark .bg-slate-150,
+#edu-app-root.dark .bg-gray-50,
+#edu-app-root.dark .bg-gray-55,
+#edu-app-root.dark .bg-gray-50\/50,
+#edu-app-root.dark .bg-slate-100\/65,
+#edu-app-root.dark .bg-slate-100\/60,
+#edu-app-root.dark .bg-slate-200\/40,
+#edu-app-root.dark .bg-slate-100\/40,
+#edu-app-root.dark .bg-white\/5,
+#edu-app-root.dark .bg-slate-100\/30,
+#edu-app-root.dark .bg-slate-50\/50,
+#edu-app-root.dark .bg-slate-100\/60 {
+  background-color: #111827 !important;
+}
+
+/* Abas ativas/desativas do Student e Teacher Dashboard */
+#edu-app-root.dark .bg-slate-100 {
+  background-color: #030712 !important;
+}
+
+#edu-app-root.dark .bg-slate-150 {
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+/* Inputs, Textareas e Selections */
+#edu-app-root.dark input,
+#edu-app-root.dark textarea,
+#edu-app-root.dark select {
+  background-color: #111827 !important;
+  color: #f9fafb !important;
+  border-color: #374151 !important;
+}
+
+#edu-app-root.dark input::placeholder,
+#edu-app-root.dark textarea::placeholder {
+  color: #6b7280 !important;
+}
+
+/* Cores de Texto Principais (Branco / Off-white de Alta Visibilidade para Títulos e Destaques) */
+#edu-app-root.dark .text-slate-950,
+#edu-app-root.dark .text-slate-900,
+#edu-app-root.dark .text-slate-850,
+#edu-app-root.dark .text-slate-800,
+#edu-app-root.dark .text-slate-750,
+#edu-app-root.dark .text-gray-950,
+#edu-app-root.dark .text-gray-900,
+#edu-app-root.dark .text-gray-850,
+#edu-app-root.dark .text-gray-800,
+#edu-app-root.dark .text-zinc-950,
+#edu-app-root.dark .text-zinc-900,
+#edu-app-root.dark .text-neutral-950,
+#edu-app-root.dark .text-neutral-900,
+#edu-app-root.dark .text-indigo-950,
+#edu-app-root.dark .text-indigo-900 {
+  color: #f8fafc !important;
+}
+
+/* Cores de Texto do Corpo / Descrições (Cinza Suave com Leitura Agradável) */
+#edu-app-root.dark .text-slate-700,
+#edu-app-root.dark .text-slate-650,
+#edu-app-root.dark .text-slate-620,
+#edu-app-root.dark .text-slate-600,
+#edu-app-root.dark .text-slate-550,
+#edu-app-root.dark .text-gray-755,
+#edu-app-root.dark .text-gray-750,
+#edu-app-root.dark .text-gray-700,
+#edu-app-root.dark .text-gray-650,
+#edu-app-root.dark .text-gray-600,
+#edu-app-root.dark .text-gray-550,
+#edu-app-root.dark .text-zinc-800,
+#edu-app-root.dark .text-zinc-700,
+#edu-app-root.dark .text-zinc-600,
+#edu-app-root.dark .text-neutral-600 {
+  color: #cbd5e1 !important;
+}
+
+/* Cores de Texto Secundárias / Legendas e Detalhes de Apoio */
+#edu-app-root.dark .text-slate-500,
+#edu-app-root.dark .text-slate-400,
+#edu-app-root.dark .text-gray-500,
+#edu-app-root.dark .text-gray-400,
+#edu-app-root.dark .text-zinc-500,
+#edu-app-root.dark .text-zinc-400,
+#edu-app-root.dark .text-neutral-500,
+#edu-app-root.dark .text-neutral-400 {
+  color: #94a3b8 !important;
+}
+
+/* Abas de navegação da barra lateral */
+#edu-app-root.dark .bg-indigo-50 {
+  background-color: #1e1b4b !important;
+  color: #a5b4fc !important;
+  border-color: #312e81 !important;
+}
+
+#edu-app-root.dark .text-indigo-700 {
+  color: #a5b4fc !important;
+}
+
+#edu-app-root.dark .text-indigo-900 {
+  color: #f9fafb !important;
+}
+
+#edu-app-root.dark .text-indigo-650 {
+  color: #cbd5e1 !important;
+}
+
+#edu-app-root.dark .bg-indigo-50 {
+  background-color: #1e1b4b !important;
+}
+
+/* Badges e Pistas de Status Coloridas */
+#edu-app-root.dark .bg-emerald-50,
+#edu-app-root.dark .bg-emerald-50\/50,
+#edu-app-root.dark .bg-emerald-50\/40,
+#edu-app-root.dark .bg-emerald-100 {
+  background-color: #064e3b !important;
+  color: #a7f3d0 !important;
+  border-color: #047857 !important;
+}
+
+#edu-app-root.dark .bg-emerald-50\/30 {
+  background-color: #064e3b/40 !important;
+}
+
+#edu-app-root.dark .bg-amber-50,
+#edu-app-root.dark .bg-amber-50\/50,
+#edu-app-root.dark .bg-amber-100 {
+  background-color: #78350f !important;
+  color: #fde68a !important;
+  border-color: #b45309 !important;
+}
+
+#edu-app-root.dark .bg-rose-50,
+#edu-app-root.dark .bg-rose-50\/50,
+#edu-app-root.dark .bg-rose-100 {
+  background-color: #4c0519 !important;
+  color: #fecdd3 !important;
+  border-color: #be123c !important;
+}
+
+#edu-app-root.dark .bg-blue-50,
+#edu-app-root.dark .bg-blue-50\/50,
+#edu-app-root.dark .bg-blue-100 {
+  background-color: #1e3a8a !important;
+  color: #bfdbfe !important;
+  border-color: #1d4ed8 !important;
+}
+
+/* Prevenção de quebra em botões e componentes principais */
+#edu-app-root.dark .text-white,
+#edu-app-root.dark .text-emerald-100,
+#edu-app-root.dark .text-indigo-100,
+#edu-app-root.dark .text-indigo-50,
+#edu-app-root.dark .text-purple-100 {
+  color: #ffffff !important;
+}
+
+#edu-app-root.dark .bg-emerald-600,
+#edu-app-root.dark .bg-indigo-600,
+#edu-app-root.dark .bg-indigo-700,
+#edu-app-root.dark .bg-purple-650,
+#edu-app-root.dark .bg-emerald-700,
+#edu-app-root.dark .bg-gradient-to-r,
+#edu-app-root.dark .bg-slate-900,
+#edu-app-root.dark .bg-slate-950,
+#edu-app-root.dark .bg-black\/50,
+#edu-app-root.dark .bg-indigo-600\/* {
+  /* Mantém as cores ricas originais */
+}
+
+/* Correções específicas adicionais para garantir contrastes perfeitos */
+#edu-app-root.dark .text-emerald-800 {
+  color: #34d399 !important;
+}
+#edu-app-root.dark .text-indigo-800 {
+  color: #a5b4fc !important;
+}
+#edu-app-root.dark .text-emerald-700 {
+  color: #34d399 !important;
+}
+#edu-app-root.dark .text-amber-700 {
+  color: #fbbf24 !important;
+}
+#edu-app-root.dark .text-rose-700 {
+  color: #f87171 !important;
+}
+#edu-app-root.dark .text-blue-700 {
+  color: #60a5fa !important;
+}
+
+/* Card especial da IA na base */
+#edu-app-root.dark .bg-slate-900 {
+  background-color: #111827 !important;
+  border-color: #374151 !important;
+}
+#edu-app-root.dark .bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+}
+#edu-app-root.dark .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* Remove gradientes de fundo iniciados em branco no modo escuro para garantir contraste perfeito de texto */
+#edu-app-root.dark .from-white,
+#edu-app-root.dark [class*="from-white"] {
+  background-image: none !important;
+}
+
+/* ----------------------------------------------------
+   SUPORTE PARA TOQUE / REMOÇÃO DE BARRAS DE ROLAGEM
+   ---------------------------------------------------- */
+
+/* Habilita rolagem suave com o dedo (momentum scrolling) no iOS/Safari */
+* {
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Esconde barras de rolagem globais para um layout limpo de aplicativo móvel */
+::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+  display: none !important;
+}
+
+* {
+  -ms-overflow-style: none !important; /* IE e Edge */
+  scrollbar-width: none !important;    /* Firefox */
+}
+
+
+/* ----------------------------------------------------
+   AJUSTE DE COLORACAO E NITIDEZ DOS HORARIOS (MODO CLARO)
+   ---------------------------------------------------- */
+
+/* Força o texto do intervalo de tempo (time) a ser super nítido no modo claro */
+#edu-app-root:not(.dark) .schedule-time-text {
+  color: #0f172a !important; /* Slate 900 absoluto */
+  font-weight: 800 !important;
+}
+
+/* Badge padrão de período (ex: "1º Horário", "2º Horário") */
+#edu-app-root:not(.dark) .schedule-period-badge {
+  background-color: #f1f5f9 !important; /* Slate 100 nítido */
+  color: #1e293b !important; /* Slate 800 de alto contraste */
+  border-color: #cbd5e1 !important; /* Slate 300 nítido */
+}
+
+/* Badge de recreio / intervalo ("L.A.I.", "ALMOÇO") no modo claro */
+#edu-app-root:not(.dark) .schedule-period-badge-break {
+  background-color: #f1f5f9 !important; /* Slate 100 */
+  color: #334155 !important; /* Slate 700 */
+  border-color: #cbd5e1 !important; /* Slate 300 */
+}
+
+/* Badge de período ativo / aula ocorrendo agora no modo claro */
+#edu-app-root:not(.dark) .schedule-period-badge-active {
+  background-color: #4f46e5 !important; /* Indigo 600 */
+  color: #ffffff !important; /* Branco puro */
+  border-color: #4338ca !important; /* Indigo 700 */
+}
+
+/* Badge dinâmico de indicação "Agora" no modo claro */
+#edu-app-root:not(.dark) .schedule-now-badge {
+  background-color: #e0e7ff !important; /* Indigo 100 */
+  color: #3730a3 !important; /* Indigo 800 */
+}
+
+
+/* ----------------------------------------------------
+   AJUSTE DE COLORACAO E NITIDEZ DOS ESTUDOS ATIVOS INTELIGENTES (MODO CLARO)
+   ---------------------------------------------------- */
+
+/* Card de Estudos Ativos Inteligentes */
+#edu-app-root:not(.dark) .active-studies-card {
+  background-color: #f5f3ff !important; /* Lavanda / Indigo bem suave */
+  border-color: #ddd6fe !important; /* Violet 200 */
+}
+
+#edu-app-root:not(.dark) .active-studies-title {
+  color: #4c1d95 !important; /* Violet 950 absoluto */
+  font-weight: 800 !important;
+}
+
+#edu-app-root:not(.dark) .active-studies-description {
+  color: #2e1065 !important; /* Violet 950 ou Indigo profundo */
+  font-weight: 600 !important;
+}
+
+#edu-app-root:not(.dark) .active-studies-description strong {
+  color: #4c1d95 !important; /* Violet 950 */
+  font-weight: 800 !important;
+}
+
+/* Flashcard Arena & Cards no Modo Claro */
+#edu-app-root:not(.dark) .flashcard-card-container {
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* Top Label (VERSO - RESPOSTA / FRENTE - PERGUNTA) */
+#edu-app-root:not(.dark) .flashcard-badge-top-label {
+  color: #475569 !important; /* Slate 600 */
+  font-weight: 800 !important;
+}
+
+/* Origem do Deck Badge */
+#edu-app-root:not(.dark) .flashcard-badge-source {
+  background-color: #f1f5f9 !important; /* Slate 100 */
+  color: #334155 !important; /* Slate 700 */
+  border-color: #cbd5e1 !important; /* Slate 300 */
+  font-weight: 700 !important;
+}
+
+/* Pergunta do Flashcard */
+#edu-app-root:not(.dark) .flashcard-question-text {
+  color: #0f172a !important; /* Slate 900 absoluto */
+  font-weight: 800 !important;
+  line-height: 1.5 !important;
+}
+
+/* Resposta do Flashcard */
+#edu-app-root:not(.dark) .flashcard-answer-text {
+  color: #065f46 !important; /* Emerald 800 absoluto */
+  font-weight: 800 !important;
+  line-height: 1.5 !important;
+}
+
+/* Explicação / Dica */
+#edu-app-root:not(.dark) .flashcard-explanation-text {
+  color: #1e293b !important; /* Slate 800 */
+  font-weight: 600 !important;
+  line-height: 1.6 !important;
+}
+
+/* Rodapé Instrutivo do Card */
+#edu-app-root:not(.dark) .flashcard-tip-footer {
+  color: #64748b !important; /* Slate 500 */
+  font-weight: 800 !important;
+}
+
+
+/* ----------------------------------------------------
+   AJUSTE DE CONTRASTE DA LINHA ATIVA E TEXTOS DE APOIO
+   ---------------------------------------------------- */
+
+/* Container da linha de horário ativa */
+#edu-app-root:not(.dark) .schedule-active-row-container {
+  background-color: #eef2ff !important; /* Indigo 50 mais visível e nítido */
+  border-left-color: #4f46e5 !important; /* Indigo 600 forte */
+  border-left-width: 4px !important;
+}
+
+/* Professor em modo claro */
+#edu-app-root:not(.dark) .schedule-teacher-text {
+  color: #1e293b !important; /* Slate 800 para contraste perfeito */
+  font-weight: 700 !important;
+}
+
+#edu-app-root:not(.dark) .schedule-teacher-text svg {
+  color: #4f46e5 !important; /* Ícone em Indigo */
+}
+
+/* Sala em modo claro */
+#edu-app-root:not(.dark) .schedule-room-text {
+  color: #334155 !important; /* Slate 700 para contraste perfeito */
+  font-weight: 700 !important;
+}
+
+#edu-app-root:not(.dark) .schedule-room-text svg {
+  color: #64748b !important; /* Slate 500 */
+}
+
+
+/* ----------------------------------------------------
+   AJUSTE DE CONTRASTE DO PERÍODO EM ANDAMENTO AGORA (MODO CLARO)
+   ---------------------------------------------------- */
+#edu-app-root:not(.dark) .schedule-active-period-card {
+  background-color: #ecfdf5 !important; /* Emerald 50 bem nítido */
+  border-color: #a7f3d0 !important; /* Emerald 200 */
+}
+
+#edu-app-root:not(.dark) .schedule-active-period-title {
+  color: #064e3b !important; /* Emerald 950 para visibilidade total */
+  font-weight: 800 !important;
+}
+
+#edu-app-root:not(.dark) .schedule-active-period-box {
+  background-color: #ffffff !important;
+  border-color: #d1fae5 !important; /* Emerald 100 */
+}
+
+#edu-app-root:not(.dark) .schedule-active-period-badge {
+  background-color: #f59e0b !important; /* Amber 500 nítido */
+  color: #0f172a !important; /* Slate 900 puro para legibilidade */
+  font-weight: 900 !important;
+}
+
+#edu-app-root:not(.dark) .schedule-active-period-main-title {
+  color: #0f172a !important; /* Slate 900 absoluto */
+  font-weight: 850 !important;
+}
+
+#edu-app-root:not(.dark) .schedule-active-period-subtitle {
+  color: #1e293b !important; /* Slate 800 */
+  font-weight: 700 !important;
+}
+
+#edu-app-root:not(.dark) .schedule-active-period-description {
+  color: #065f46 !important; /* Emerald 800 */
+  font-weight: 650 !important;
+}
+
+
+/* ----------------------------------------------------
+   UTILITY CLASSES & MOBILE TOUCH TARGETS ENHANCEMENTS
+   ---------------------------------------------------- */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+  -webkit-overflow-scrolling: touch !important; /* Smooth momentum scrolling */
+}
+
+/* Ensure touch targets have good spacing on tiny mobile screens */
+@media (max-width: 640px) {
+  #edu-app-root button, 
+  #edu-app-root select, 
+  #edu-app-root input {
+    min-height: 40px; /* Touch friendly minimum height for inputs and buttons on mobile */
+  }
+}
+
+
+
+

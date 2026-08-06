@@ -1,0 +1,45 @@
+{
+  "entities": {
+    "activities": {
+      "title": "Activities / Homework",
+      "description": "School assignments and homework for students",
+      "properties": {
+        "title": { "type": "string", "description": "Title of activity" },
+        "subject": { "type": "string", "description": "Subject name" },
+        "description": { "type": "string", "description": "Activity details" },
+        "dueDate": { "type": "string", "description": "Due date string" },
+        "status": { "type": "string", "description": "pendente, entregue, or avaliado" },
+        "grade": { "type": "number", "description": "Grade awarded" },
+        "feedback": { "type": "string", "description": "Teacher feedback" },
+        "studentId": { "type": "string", "description": "Student ID" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["title", "subject"]
+    },
+    "announcements": {
+      "title": "Announcements",
+      "description": "School notices and updates",
+      "properties": {
+        "title": { "type": "string", "description": "Notice title" },
+        "content": { "type": "string", "description": "Notice text" },
+        "category": { "type": "string", "description": "Notice category" },
+        "author": { "type": "string", "description": "Author name" },
+        "date": { "type": "string", "description": "Formatted date" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["title", "content"]
+    },
+    "chat_messages": {
+      "title": "Chat Messages",
+      "description": "Messages exchanged between students and teachers",
+      "properties": {
+        "channelId": { "type": "string", "description": "ID of conversation channel" },
+        "senderRole": { "type": "string", "description": "aluno or professor" },
+        "senderName": { "type": "string", "description": "Name of sender" },
+        "text": { "type": "string", "description": "Message body" },
+        "timestamp": { "type": "string", "description": "ISO timestamp" }
+      },
+      "required": ["channelId", "text"]
+    }
+  }
+}

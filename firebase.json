@@ -1,0 +1,6 @@
+{
+  "firestore": {
+    "database": "ai-studio-portaldeatividad-8c9948d8-def2-40e0-99f2-ffc3000d44a8",
+    "rules": "firestore.rules"
+  }
+}

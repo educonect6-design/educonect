@@ -1,0 +1,6 @@
+{
+  "name": "Portal de Atividades e Estudos",
+  "description": "Plataforma educacional para alunos e professores gerenciarem atividades, enviarem entregas, conversarem no chat e tirarem dúvidas com um Tutor IA seguro e focado.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
